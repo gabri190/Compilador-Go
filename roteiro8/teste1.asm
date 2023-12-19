@@ -1,0 +1,407 @@
+; constantes
+    SYS_EXIT equ 1
+    SYS_READ equ 3
+    SYS_WRITE equ 4
+    STDIN equ 0
+    STDOUT equ 1
+    True equ 1
+    False equ 0
+
+segment .data
+
+    formatin : db ”%d” , 0
+    formatout : db ”%d” , 10 , 0 ; newline , nul terminator
+    scanint : times 4 db 0 ; 32− b i t s i n t e g e r = 4 bytes
+
+segment .bss ; variaveis
+    res RESB 1
+
+section.text 
+    ;global _main ; windows
+    ;extern _scanf ; windows
+    ;extern _printf ; windows
+
+; subrotinas i f / while
+    binop_je :
+    JE binop_true
+    JMP binop_false
+    binop_jg :
+    JG binop_true
+    JMP binop_false
+    binop_jl :
+    JL binop_true
+    JMP binop_false
+    binop_false :
+    MOV EAX, False
+    JMP binop_exit
+    binop_true :
+    MOV EAX, True
+    binop_exit :
+    RET
+PUSH DWORD 0
+PUSH scanint
+PUSH formatin
+call scanf
+ADD ESP, 8
+MOV EAX, DWORD [scanint]
+MOV [EBP-44], EAX
+MOV [EBP-44], EAX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV EAX, 2
+PUSH EAX
+MOV EAX, 4
+PUSH EAX
+MOV EAX, 6
+POP EBX
+ADD EAX, EBX
+POP EBX
+CDQ
+IDIV EBX
+PUSH EAX
+MOV EAX, 1
+PUSH EAX
+MOV EAX, 0
+POP EBX
+CDQ
+IDIV EBX
+PUSH EAX
+MOV EAX, 2
+PUSH EAX
+MOV EAX, 4
+PUSH EAX
+MOV EAX, 2
+POP EBX
+IMUL EAX, EBX
+POP EBX
+CDQ
+IDIV EBX
+PUSH EAX
+MOV EAX, 2
+PUSH EAX
+MOV EAX, 3
+PUSH EAX
+MOV EAX, 6
+POP EBX
+CDQ
+IDIV EBX
+POP EBX
+IMUL EAX, EBX
+PUSH EAX
+MOV EAX, 3
+POP EBX
+ADD EAX, EBX
+POP EBX
+SUB EAX, EBX
+POP EBX
+ADD EAX, EBX
+POP EBX
+SUB EAX, EBX
+MOV EAX, 3
+MOV [EBP-292], EAX
+MOV [EBP-292], EAX
+PUSH EAX
+MOV [EBP-288], EAX
+MOV [EBP-288], EAX
+POP EBX
+ADD EAX, EBX
+PUSH DWORD 0
+MOV [EBP-328], EAX
+MOV [EBP-328], EAX
+PUSH EAX
+MOV [EBP-324], EAX
+MOV [EBP-324], EAX
+POP EBX
+ADD EAX, EBX
+MOV EAX, 0
+LOOP_133: ; o unique identifier do nó while é 133
+MOV EAX, 2
+PUSH EAX
+MOV [EBP-480], EAX
+MOV [EBP-480], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_je
+PUSH EAX
+MOV EAX, 1
+PUSH EAX
+MOV [EBP-468], EAX
+MOV [EBP-468], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_jl
+POP EBX
+OR EAX, EBX
+CMP EAX, False
+JE EXIT_133
+MOV [EBP-520], EAX
+MOV [EBP-520], EAX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV EAX, 1
+PUSH EAX
+MOV [EBP-500], EAX
+MOV [EBP-500], EAX
+POP EBX
+ADD EAX, EBX
+JMP LOOP_133
+EXIT_133:
+MOV [EBP-556], EAX
+MOV [EBP-556], EAX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-568], EAX
+MOV [EBP-568], EAX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV EAX, 1
+PUSH EAX
+MOV [EBP-580], EAX
+MOV [EBP-580], EAX
+POP EBX
+ADD EAX, EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV EAX, 2
+PUSH DWORD 0
+MOV EAX, 2
+PUSH EAX
+MOV [EBP-640], EAX
+MOV [EBP-640], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_je
+MOV [EBP-664], EAX
+MOV [EBP-664], EAX
+PUSH EAX
+MOV [EBP-660], EAX
+MOV [EBP-660], EAX
+POP EBX
+ADD EAX, EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-684], EAX
+MOV [EBP-684], EAX
+PUSH EAX
+MOV [EBP-680], EAX
+MOV [EBP-680], EAX
+POP EBX
+SUB EAX, EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-704], EAX
+MOV [EBP-704], EAX
+PUSH EAX
+MOV [EBP-700], EAX
+MOV [EBP-700], EAX
+POP EBX
+IMUL EAX, EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-724], EAX
+MOV [EBP-724], EAX
+PUSH EAX
+MOV [EBP-720], EAX
+MOV [EBP-720], EAX
+POP EBX
+CDQ
+IDIV EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-744], EAX
+MOV [EBP-744], EAX
+PUSH EAX
+MOV [EBP-740], EAX
+MOV [EBP-740], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_je
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-764], EAX
+MOV [EBP-764], EAX
+PUSH EAX
+MOV [EBP-760], EAX
+MOV [EBP-760], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_jl
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-784], EAX
+MOV [EBP-784], EAX
+PUSH EAX
+MOV [EBP-780], EAX
+MOV [EBP-780], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_jg
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+PUSH DWORD 0
+PUSH DWORD 0
+MOV EAX, 1
+MOV EAX, 1
+MOV EAX, 2
+MOV [EBP-920], EAX
+MOV [EBP-920], EAX
+PUSH EAX
+MOV [EBP-916], EAX
+MOV [EBP-916], EAX
+POP EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-940], EAX
+MOV [EBP-940], EAX
+PUSH EAX
+MOV [EBP-936], EAX
+MOV [EBP-936], EAX
+POP EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-960], EAX
+MOV [EBP-960], EAX
+PUSH EAX
+MOV [EBP-956], EAX
+MOV [EBP-956], EAX
+POP EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-980], EAX
+MOV [EBP-980], EAX
+PUSH EAX
+MOV [EBP-976], EAX
+MOV [EBP-976], EAX
+POP EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV EAX, 1
+PUSH EAX
+MOV [EBP-1000], EAX
+MOV [EBP-1000], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_je
+PUSH EAX
+MOV [EBP-996], EAX
+MOV [EBP-996], EAX
+POP EBX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-1028], EAX
+MOV [EBP-1028], EAX
+PUSH EAX
+MOV [EBP-1024], EAX
+MOV [EBP-1024], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_je
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-1048], EAX
+MOV [EBP-1048], EAX
+PUSH EAX
+MOV [EBP-1044], EAX
+MOV [EBP-1044], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_jl
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+MOV [EBP-1068], EAX
+MOV [EBP-1068], EAX
+PUSH EAX
+MOV [EBP-1064], EAX
+MOV [EBP-1064], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_jg
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+PUSH DWORD 0
+PUSH DWORD 0
+MOV EAX, 1
+PUSH EAX
+MOV EAX, 3
+POP EBX
+ADD EAX, EBX
+MOV [EBP-1160], EAX
+MOV [EBP-1160], EAX
+MOV EAX, 3
+LOOP_334: ; o unique identifier do nó while é 334
+MOV EAX, 5
+PUSH EAX
+MOV [EBP-1276], EAX
+MOV [EBP-1276], EAX
+POP EBX
+CMP EAX, EBX
+CALL binop_jl
+CMP EAX, False
+JE EXIT_334
+MOV EAX, 1
+PUSH EAX
+MOV [EBP-1316], EAX
+MOV [EBP-1316], EAX
+POP EBX
+SUB EAX, EBX
+MOV EAX, 1
+PUSH EAX
+MOV [EBP-1292], EAX
+MOV [EBP-1292], EAX
+POP EBX
+ADD EAX, EBX
+JMP LOOP_334
+EXIT_334:
+MOV [EBP-1344], EAX
+MOV [EBP-1344], EAX
+PUSH EAX
+PUSH formatout
+CALL printf
+ADD ESP, 8
+; interrupcao de saida (default)
+
+POP EBP
+
+MOV EAX, 1
+
+INT 0x80
